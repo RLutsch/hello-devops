@@ -3,7 +3,10 @@ echo "Check if there are changes in the Git repository"
 if git fetch origin && ! git diff --quiet main..origin/main; then
     echo "Pulling the latest changes from the Git repository"
     git pull
+else
+    echo "No changes in the Git repository"
 fi
+
 echo "Copy index.html to Nginx document root"
 sudo cp nginx/index.html /var/www/html/
 
