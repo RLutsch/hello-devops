@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to My Nginx Page</title>
+    <style>
+        #status-light {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Nginx Landing Page</h1>
+    <p>This is a simple landing page hosted by Nginx on your server.</p>
+    <button id="get-status-button">Get Status</button>
+    <div id="status-light"></div>
+    
+    <script>
+        // JavaScript code to handle the button click and status update
+        document.getElementById('get-status-button').addEventListener('click', () => {
+            // Send a request to the backend to get the status
+            fetch('/get-status') // Update the URL to the actual backend endpoint
+                .then(response => response.json())
+                .then(data => {
+                    // Update the status light based on the response from the backend
+                    const statusLight = document.getElementById('status-light');
+                    if (data.status === 'on') {
+                        statusLight.style.backgroundColor = 'green';
+                    } else {
+                        statusLight.style.backgroundColor = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
