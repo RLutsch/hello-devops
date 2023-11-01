@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 
-app = Flask(__name)
+app = Flask(__name__)
 
 # Define a route to get the status
 @app.route('/get-status', methods=['GET'])
