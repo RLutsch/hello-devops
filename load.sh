@@ -10,7 +10,7 @@ fi
 sudo cp nginx/index.html /var/www/html/
 
 # Copy nginx.conf to Nginx configuration
-sudo cp nginx/nginx.conf /etc/nginx/
+sudo cp nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Restart Nginx
 sudo systemctl restart nginx
