@@ -1,5 +1,5 @@
 #!/bin/bash
-# Check if there are changes in the Git repository
+echo "Check if there are changes in the Git repository"
 if git diff --quiet; then
     echo "No changes in the Git repository stopping here."
     # Exit the script
