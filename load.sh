@@ -1,5 +1,11 @@
 #!/bin/bash
-
+# Check if there are changes in the Git repository
+if git diff --quiet; then
+    echo "No changes in the Git repository."
+else
+    # Pull the latest changes from the Git repository
+    git pull
+fi
 # Copy index.html to Nginx document root
 sudo cp nginx/index.html /var/www/html/
 
