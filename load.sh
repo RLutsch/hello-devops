@@ -18,4 +18,4 @@ sudo systemctl restart nginx
 
 echo "Run Flask app on port 5000"
 cd python
-python3 app.py
+sudo systemctl restart myflaskapp
