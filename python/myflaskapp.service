@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/root/hello-devops/python
-ExecStart=/usr/bin/python3 /root/hello-devops/python/app.py
+ExecStart=/root/hello-devops/python/venv/bin/python /root/hello-devops/python/app.py
 
 [Install]
 WantedBy=multi-user.target
