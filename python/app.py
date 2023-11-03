@@ -26,12 +26,30 @@ def create_pressed_table():
         if conn:
             conn.close()
 
+# Function to get the count from the "pressed" table
+def get_pressed_count():
+    try:
+        conn = psycopg2.connect(**db_params)
+        cur = conn.cursor()
+
+        # Retrieve the count from the "pressed" table
+        cur.execute("SELECT count FROM pressed;")
+        count = cur.fetchone()[0] if cur.rowcount > 0 else 0
+        return count
+    except Exception as e:
+        print(str(e))
+        return 0
+    finally:
+        if conn:
+            conn.close()
+
 # Define a route to get the status
 @app.route('/get-status', methods=['GET'])
 def get_status():
-    # Replace this with your actual logic to get the status
-    status = 'on'  # Example status, you can change this as needed
-    return jsonify({'status': status})
+    # Get the count from the "pressed" table
+    count = get_pressed_count()
+
+    return jsonify({'count': count})
 
 # Define a route to increment the "pressed" table
 @app.route('/pressed', methods=['POST'])
@@ -44,7 +62,10 @@ def increment_pressed():
         cur.execute("UPDATE pressed SET count = count + 1;")
         conn.commit()
 
-        return jsonify({'message': 'Counter incremented successfully'})
+        # Get the updated count
+        count = get_pressed_count()
+
+        return jsonify({'count': count})
     except Exception as e:
         return jsonify({'error': str(e)})
     finally:
