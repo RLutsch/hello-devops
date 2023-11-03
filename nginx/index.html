@@ -21,17 +21,17 @@
     <script>
         // JavaScript code to handle the button click and status update
         document.getElementById('get-status-button').addEventListener('click', () => {
-            // Send a request to the backend to get the status
-            fetch('/get-status') // Update the URL to the actual backend endpoint
-                .then(response => response.json())
-                .then(data => {
-                    // Update the status light based on the response from the backend
-                    const statusLight = document.getElementById('status-light');
-                    if (data.status === 'on') {
-                        statusLight.style.backgroundColor = 'green';
-                    } else {
-                        statusLight.style.backgroundColor = 'red';
+            // Send a request to increment the value
+            fetch('/pressed', { method: 'POST' }) // Sending a POST request to the /pressed route
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
                     }
+                    throw new Error('Request failed.');
+                })
+                .then(data => {
+                    // Log the response for debugging
+                    console.log(data);
                 })
                 .catch(error => {
                     console.error('Error:', error);
