@@ -1,0 +1,11 @@
+[Unit]
+Description=My Flask App
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/hello-devops/python
+ExecStart=/usr/bin/python3 /root/hello-devops/python/app.py
+
+[Install]
+WantedBy=multi-user.target
