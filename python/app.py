@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import psycopg2
 
-app = Flask(__name)
+app = Flask(__name__)
 
 # Database connection parameters
 db_params = {
