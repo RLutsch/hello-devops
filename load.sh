@@ -1,21 +1,24 @@
 #!/bin/bash
-echo "Check if there are changes in the Git repository"
+# change directory to where the script is located
+cd /root/hello-devops
+echo "$(date +"%Y-%m-%d %H:%M:%S") Check if there are changes in the Git repository" >> /var/log/cron.log
 if git fetch origin && ! git diff --quiet main..origin/main; then
-    echo "Pulling the latest changes from the Git repository"
+    echo "$(date +"%Y-%m-%d %H:%M:%S") Pulling the latest changes from the Git repository" >> /var/log/cron.log
     git pull
 else
-    echo "No changes in the Git repository"
+    echo "$(date +"%Y-%m-%d %H:%M:%S") No changes in the Git repository" >> /var/log/cron.log
+    exit 0
 fi
 
-echo "Copy index.html to Nginx document root"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Copy index.html to Nginx document root">> /var/log/cron.log
 sudo cp nginx/index.html /var/www/html/
 
-echo "Copy nginx.conf to Nginx configuration"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Copy nginx.conf to Nginx configuration">> /var/log/cron.log
 sudo cp nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-echo "Restart Nginx"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Restart Nginx" >> /var/log/cron.log
 sudo systemctl restart nginx
 
-echo "Run Flask app on port 5000"
+echo "$(date +"%Y-%m-%d %H:%M:%S") Run Flask app on port 5000">> /var/log/cron.log
 cd python
 sudo systemctl restart myflaskapp
