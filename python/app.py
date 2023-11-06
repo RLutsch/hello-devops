@@ -52,7 +52,7 @@ def get_status():
     return jsonify({'count': count})
 
 # Define a route to increment the "pressed" table
-@app.route('/pressed', methods=['POST'])
+@app.route('/pressed', methods=['GET'])
 def increment_pressed():
     try:
         conn = psycopg2.connect(**db_params)
