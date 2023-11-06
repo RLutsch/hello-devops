@@ -16,6 +16,7 @@
     <h1>Welcome, press the button</h1>
     <p>This is a simple landing page hosted by Nginx on your server.</p>
     <button id="get-status-button">Get Status</button>
+    <p>Button Press Count: <span id="count">0</span></p> <!-- Added this line -->
     <div id="status-light"></div>
     
     <script>
@@ -30,6 +31,8 @@
                     throw new Error('Request failed.');
                 })
                 .then(data => {
+                    // Update the count display
+                    document.getElementById('count').textContent = data.count;
                     // Log the response for debugging
                     console.log(data);
                 })
@@ -40,3 +43,4 @@
     </script>
 </body>
 </html>
+
