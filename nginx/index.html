@@ -22,7 +22,7 @@
         // JavaScript code to handle the button click and status update
         document.getElementById('get-status-button').addEventListener('click', () => {
             // Send a request to increment the value
-            fetch('/api/pressed', { method: 'GET' }) // Sending a POST request to the /pressed route
+            fetch('/api/pressed', { method: 'GET' }) // Sending a GET request to the /pressed route
                 .then(response => {
                     if (response.ok) {
                         return response.json();

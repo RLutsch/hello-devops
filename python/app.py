@@ -17,8 +17,16 @@ def create_pressed_table():
         conn = psycopg2.connect(**db_params)
         cur = conn.cursor()
 
-        # Create the "pressed" table if it doesn't exist
-        cur.execute("CREATE TABLE IF NOT EXISTS pressed (id SERIAL PRIMARY KEY, count INT DEFAULT 0);")
+        # Check if a row exists in the "pressed" table
+        cur.execute("SELECT 1 FROM pressed LIMIT 1;")
+
+        if cur.fetchone() is None:
+            # If no row exists, insert an initial row with count = 1
+            cur.execute("INSERT INTO pressed (count) VALUES (1);")
+        else:
+            # If a row exists, increment the count
+            cur.execute("UPDATE pressed SET count = count + 1;")
+
         conn.commit()
     except Exception as e:
         print(str(e))
