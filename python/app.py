@@ -1,14 +1,15 @@
 from flask import Flask, jsonify
 import psycopg2
+import os
 
 app = Flask(__name__)
 
 # Database connection parameters
 db_params = {
-    "dbname": "mybelovedpet",
-    "user": "petster",
-    "password": "your_password_here",
-    "host": "localhost",  # Change this if your database is on a different host
+    "dbname": os.getenv("DB_NAME"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "host": os.getenv("DB_HOST"),
 }
 
 # Function to create the "pressed" table
@@ -84,4 +85,4 @@ if __name__ == '__main__':
     # Create the "pressed" table if it doesn't exist
     create_pressed_table()
 
-    app.run(host='0.0.0.0', port=5000)  # Replace with your preferred host and port
+    app.run(host='0.0.0.0', port=5001)  # Replace with your preferred host and port

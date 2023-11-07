@@ -1,0 +1,43 @@
+version: '3'
+services:
+  flask-app:
+    build:
+      context: ./python
+    ports:
+      - "5001:5001"
+    environment:
+      - DB_NAME=dbname
+      - DB_USER=dbuser
+      - DB_PASSWORD=dbpassword
+      - DB_HOST=postgres
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: DockerfileDev
+    ports:
+      - "8080:80"
+    depends_on:
+      - flask-app
+    networks:
+      - mynetwork
+# mount file from host to container
+    volumes:
+      - /etc/letsencrypt/live/whatever.beer/fullchain.pem
+      - /etc/letsencrypt/live/whatever.beer/privkey.pem
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: dbname
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

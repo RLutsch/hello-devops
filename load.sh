@@ -10,15 +10,5 @@ else
     exit 0
 fi
 
-echo "$(date +"%Y-%m-%d %H:%M:%S") Copy index.html to Nginx document root">> /var/log/cron.log
-sudo cp nginx/index.html /var/www/html/
-
-echo "$(date +"%Y-%m-%d %H:%M:%S") Copy nginx.conf to Nginx configuration">> /var/log/cron.log
-sudo cp nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
-
-echo "$(date +"%Y-%m-%d %H:%M:%S") Restart Nginx" >> /var/log/cron.log
-sudo systemctl restart nginx
-
-echo "$(date +"%Y-%m-%d %H:%M:%S") Run Flask app on port 5000">> /var/log/cron.log
-cd python
-sudo systemctl restart myflaskapp
+docker-compose build
+docker-compose up -d
