@@ -28,8 +28,8 @@ services:
       - mynetwork
 # mount file from host to container
     volumes:
-      - /etc/letsencrypt/live/whatever.beer/fullchain.pem
-      - /etc/letsencrypt/live/whatever.beer/privkey.pem
+      - /etc/letsencrypt/live/whatever.beer/fullchain.pem:/etc/letsencrypt/live/whatever.beer/fullchain.pem
+      - /etc/letsencrypt/live/whatever.beer/privkey.pem:/etc/letsencrypt/live/whatever.beer/privkey.pem
 
   postgres:
     image: postgres:latest
