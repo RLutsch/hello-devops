@@ -9,6 +9,6 @@ else
     echo "$(date +"%Y-%m-%d %H:%M:%S") No changes in the Git repository" >> /var/log/cron.log
     exit 0
 fi
-echo "docker-compose down and up"
+echo "docker-compose down and up" >> /var/log/cron.log
 docker-compose down
 docker-compose up -d --build
