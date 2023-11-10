@@ -30,6 +30,7 @@ services:
     volumes:
       - /etc/letsencrypt/live/whatever.beer/fullchain.pem:/etc/letsencrypt/live/whatever.beer/fullchain.pem
       - /etc/letsencrypt/live/whatever.beer/privkey.pem:/etc/letsencrypt/live/whatever.beer/privkey.pem
+      - /etc/ssl/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
 
   postgres:
     image: postgres:latest
